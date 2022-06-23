@@ -1,0 +1,4 @@
+#Bus/Truck
+Single Journey 145/-
+Return Journey 220/-
+Monthly Pass 4390*/-

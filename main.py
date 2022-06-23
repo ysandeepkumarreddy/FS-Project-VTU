@@ -5,13 +5,16 @@ import os
 import time
 
 # ===================Python Variables=======================
-menu_category = ["Tea & Coffee", "Beverages", "Fast Food",
-                 "South Indian", "Starters", "Main Course", "Dessert"]
+menu_category = ["2 Wheeler", "3 Wheeler",
+                 "4 Wheeler", "Bus/Truck", "Light Carrying Vechile", "Multi-Axle", "Heavy Carrying Vehicle"]
 
-menu_category_dict = {"Tea & Coffee": "1 Tea & Coffee.txt", "Beverages": "2 Beverages.txt",
-                      "Fast Food": "3 Fast Food.txt", "South Indian": "4 South Indian.txt",
-                      "Starters": "5 Starters.txt", "Main Course": "6 Main Course.txt",
-                      "Dessert": "7 Dessert.txt"}
+menu_category_dict = {"2 Wheeler": "1. 2 Wheeler.txt",
+                      "3 Wheeler": "2. 3 Wheeler.txt",
+                      "4 Wheeler": "3. 4 Wheeler.txt",
+                      "Bus/Truck": "4. Bus/Truck.txt",
+                      "Light Carrying Vechile": "5. Light Carrying Vechile.txt",
+                      "Multi-Axle": "6. Multi-Axle.txt",
+                      "Heavy Carrying Vehicle": "7. Heavy Carrying Vehicle.txt"}
 
 order_dict = {}
 for i in menu_category:
@@ -47,7 +50,6 @@ def load_menu():
                 price = line[line.rfind(" ")+1:-3]
 
             menu_tabel.insert('', END, values=[name, price, category])
-        #menu_tabel.insert('',END,values=["Masala Dosa","50"])
 
 
 def load_order():
@@ -208,11 +210,10 @@ def bill_button_operation():
         bill = Toplevel()
         bill.title("Bill")
         bill.geometry("670x500+300+100")
-        bill.wm_iconbitmap("Coffee.ico")
+        bill.wm_iconbitmap("bill.ico")
         bill_text_area = Text(bill, font=("arial", 12))
-        st = "\t\t\t\tFood Plaza\n\t\t\tBDA Complex, koramangala-560034\n"
-        st += "\t\t\tGST.NO:- 27AHXPP3379HIZH\n"
-        st += "-"*61 + "BILL" + "-"*61 + "\nDate:- "
+        st = "\t\t\tNational Highway Nice Road Toll Plaza\n\t\t\tNice Road, Bangalore\n"
+        st += "-"*60 + " BILL " + "-"*60 + "\nDate:- "
 
         #Date and time
         t = time.localtime(time.time())
@@ -272,11 +273,8 @@ def bill_button_operation():
 def close_window():
     tmsg.showinfo("Thanks", "Thanks for using our service")
     root.destroy()
-# [name,rate,quantity,str(int(rate)*int(quantity)),category]
-# ==================Backend Code Ends===============
 
 
-# ================Frontend Code Start==============
 root = Tk()
 w = 1360  # width for the Tk root
 h = 720  # height for the Tk root
@@ -349,15 +347,15 @@ customer_name_entry.grid(row=0, column=5, padx=50)
 menu_frame = Frame(root, bd=8, bg="lightgreen", relief=GROOVE)
 menu_frame.place(x=0, y=125, height=585, width=680)
 
-menu_label = Label(menu_frame, text="Menu",
-                   font=("times new roman", 20, "bold"), bg="lightgreen", fg="red", pady=0)
+menu_label = Label(menu_frame, text="Destinations",
+                   font=("times new roman", 20, "bold"), bg="lightblue", fg="red", pady=0)
 menu_label.pack(side=TOP, fill="x")
 
-menu_category_frame = Frame(menu_frame, bg="lightgreen", pady=10)
+menu_category_frame = Frame(menu_frame, bg="lightblue", pady=10)
 menu_category_frame.pack(fill="x")
 
 combo_lable = Label(menu_category_frame, text="Select Type",
-                    font=("arial", 12, "bold"), bg="lightgreen", fg="blue")
+                    font=("arial", 12, "bold"), bg="lightblue", fg="blue")
 combo_lable.grid(row=0, column=0, padx=10)
 
 menuCategory = StringVar()
@@ -413,14 +411,14 @@ menu_tabel.bind("<ButtonRelease-1>", load_item_from_menu)
 item_frame = Frame(root, bd=8, bg="lightgreen", relief=GROOVE)
 item_frame.place(x=680, y=125, height=230, width=680)
 
-item_title_label = Label(item_frame, text="Item",
+item_title_label = Label(item_frame, text="Toll Billing Desk",
                          font=("times new roman", 20, "bold"), bg="lightgreen", fg="red")
 item_title_label.pack(side=TOP, fill="x")
 
 item_frame2 = Frame(item_frame, bg="lightgreen")
 item_frame2.pack(fill=X)
 
-item_name_label = Label(item_frame2, text="Name",
+item_name_label = Label(item_frame2, text="From - To",
                         font=("arial", 12, "bold"), bg="lightgreen", fg="blue")
 item_name_label.grid(row=0, column=0)
 
@@ -433,7 +431,7 @@ item_name = Entry(item_frame2, font="arial 12",
                   textvariable=itemName, state=DISABLED, width=25)
 item_name.grid(row=0, column=1, padx=10)
 
-item_rate_label = Label(item_frame2, text="Rate",
+item_rate_label = Label(item_frame2, text="Toll Price",
                         font=("arial", 12, "bold"), bg="lightgreen", fg="blue")
 item_rate_label.grid(row=0, column=2, padx=40)
 
@@ -456,16 +454,16 @@ item_quantity.grid(row=1, column=1)
 item_frame3 = Frame(item_frame, bg="lightgreen")
 item_frame3.pack(fill=X)
 
-add_button = ttk.Button(item_frame3, text="Add Item",
+add_button = ttk.Button(item_frame3, text="Add",
                         command=add_button_operation)
 add_button.grid(row=0, column=0, padx=40, pady=30)
 
 remove_button = ttk.Button(
-    item_frame3, text="Remove Item", command=remove_button_operation)
+    item_frame3, text="Remove", command=remove_button_operation)
 remove_button.grid(row=0, column=1, padx=40, pady=30)
 
 update_button = ttk.Button(
-    item_frame3, text="Update Quantity", command=update_button_operation)
+    item_frame3, text="Update", command=update_button_operation)
 update_button.grid(row=0, column=2, padx=40, pady=30)
 
 clear_button = ttk.Button(item_frame3, text="Clear",
@@ -492,14 +490,14 @@ order_tabel = ttk.Treeview(order_tabel_frame,
                            yscrollcommand=scrollbar_order_y.set)
 
 order_tabel.heading("name", text="Name")
-order_tabel.heading("rate", text="Rate")
-order_tabel.heading("quantity", text="Quantity")
+order_tabel.heading("rate", text="Toll Price")
+order_tabel.heading("quantity", text="No.of Tickets")
 order_tabel.heading("price", text="Price")
 order_tabel["displaycolumns"] = ("name", "rate", "quantity", "price")
 order_tabel["show"] = "headings"
-order_tabel.column("rate", width=100, anchor='center', stretch=NO)
-order_tabel.column("quantity", width=100, anchor='center', stretch=NO)
-order_tabel.column("price", width=100, anchor='center', stretch=NO)
+order_tabel.column("rate", width=130, anchor='center', stretch=NO)
+order_tabel.column("quantity", width=130, anchor='center', stretch=NO)
+order_tabel.column("price", width=130, anchor='center', stretch=NO)
 
 order_tabel.bind("<ButtonRelease-1>", load_item_from_order)
 
@@ -529,7 +527,7 @@ bill_button = ttk.Button(order_frame, text="Bill", width=8,
 bill_button.pack(side=LEFT, anchor=SW, padx=80, pady=10)
 
 cancel_button = ttk.Button(
-    order_frame, text="Cancel Order", command=cancel_button_operation)
+    order_frame, text="Cancel Bill", command=cancel_button_operation)
 cancel_button.pack(side=LEFT, anchor=SW, padx=20, pady=10)
 
 root.mainloop()
