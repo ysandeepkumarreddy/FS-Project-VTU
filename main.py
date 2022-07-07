@@ -4,15 +4,14 @@ import tkinter.messagebox as tmsg
 import os
 import time
 
-# ===================Python Variables=======================
 menu_category = ["2 Wheeler", "3 Wheeler",
-                 "4 Wheeler", "Bus/Truck", "Light Carrying Vechile", "Multi-Axle", "Heavy Carrying Vehicle"]
+                 "4 Wheeler", "Bus/Truck", "Light Carrying Vehicle", "Multi-Axle", "Heavy Carrying Vehicle"]
 
 menu_category_dict = {"2 Wheeler": "1. 2 Wheeler.txt",
                       "3 Wheeler": "2. 3 Wheeler.txt",
                       "4 Wheeler": "3. 4 Wheeler.txt",
                       "Bus/Truck": "4. Bus/Truck.txt",
-                      "Light Carrying Vechile": "5. Light Carrying Vechile.txt",
+                      "Light Carrying Vehicle": "5. Light Carrying Vehicle.txt",
                       "Multi-Axle": "6. Multi-Axle.txt",
                       "Heavy Carrying Vehicle": "7. Heavy Carrying Vehicle.txt"}
 
@@ -21,7 +20,6 @@ for i in menu_category:
     order_dict[i] = {}
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-# ====================Backend Functions===========================
 
 
 def load_menu():
@@ -199,10 +197,10 @@ def bill_button_operation():
         tmsg.showinfo("Error", "Your order list is Empty")
         return
     if customer_name == "" or customer_contact == "":
-        tmsg.showinfo("Error", "Customer Details Required")
+        tmsg.showinfo("Error", "Vehicle Details Required")
         return
     if not customerContact.get().isdigit():
-        tmsg.showinfo("Error", "Invalid Customer Contact")
+        tmsg.showinfo("Error", "Invalid Vehicle Contact")
         return
     ans = tmsg.askquestion("Generate Bill", "Are You Sure to Generate Bill?")
     ans = "yes"
@@ -224,7 +222,7 @@ def bill_button_operation():
             f"\t\t\t\t\t\tTime:- {t.tm_hour} : {t.tm_min} : {t.tm_sec}"
 
         # Customer Name & Contact
-        st += f"\nCustomer Name:- {customer_name}\nCustomer Contact:- {customer_contact}\n"
+        st += f"\nVehicle No:- {customer_name}\nCustomer Contact:- {customer_contact}\n"
         st += "-"*130 + "\n" + " "*4 + "DESCRIPTION\t\t\t\t\tRATE\tQUANTITY\t\tAMOUNT\n"
         st += "-"*130 + "\n"
 
@@ -267,12 +265,7 @@ def bill_button_operation():
 
         bill_text_area.pack(expand=True, fill=BOTH)
         bill.focus_set()
-        bill.protocol("WM_DELETE_WINDOW", close_window)
-
-
-def close_window():
-    tmsg.showinfo("Thanks", "Thanks for using our service")
-    root.destroy()
+        bill.protocol("WM_DELETE_WINDOW")
 
 
 root = Tk()
@@ -299,22 +292,22 @@ root.wm_iconbitmap("toll-road.ico")
 # ================Title==============
 style_button = ttk.Style()
 style_button.configure("TButton", font=("arial", 10, "bold"),
-                       background="lightgreen")
+                       background="lightgrey")
 
-title_frame = Frame(root, bd=8, bg="cyan", relief=GROOVE)
+title_frame = Frame(root, bd=8, bg="lightgrey", relief=GROOVE)
 title_frame.pack(side=TOP, fill="x")
 
 title_label = Label(title_frame, text="National Highway Toll Plaza", font=(
-    "times new roman", 22, "bold"), bg="cyan", fg="red", pady=5)
+    "times new roman", 22, "bold"), bg="lightgrey", fg="red", pady=5)
 title_label.pack()
 
 # ==============Customer=============
 customer_frame = LabelFrame(root, text="Customer Details", font=("times new roman", 15, "bold"),
-                            bd=8, bg="lightblue", relief=GROOVE)
+                            bd=8, bg="lightgrey", relief=GROOVE)
 customer_frame.pack(side=TOP, fill="x")
 
-customer_name_label = Label(customer_frame, text="Name",
-                            font=("arial", 15, "bold"), bg="lightblue", fg="blue")
+customer_name_label = Label(customer_frame, text="Vehicle No:",
+                            font=("arial", 15, "bold"), bg="lightgrey", fg="blue")
 customer_name_label.grid(row=0, column=0)
 
 customerName = StringVar()
@@ -324,7 +317,7 @@ customer_name_entry = Entry(customer_frame, width=20, font="arial 15", bd=5,
 customer_name_entry.grid(row=0, column=1, padx=50)
 
 customer_contact_label = Label(customer_frame, text="Contact",
-                               font=("arial", 15, "bold"), bg="lightblue", fg="blue")
+                               font=("arial", 15, "bold"), bg="lightgrey", fg="blue")
 customer_contact_label.grid(row=0, column=2)
 
 customerContact = StringVar()
@@ -332,30 +325,20 @@ customerContact.set("")
 customer_contact_entry = Entry(customer_frame, width=20, font="arial 15", bd=5,
                                textvariable=customerContact)
 customer_contact_entry.grid(row=0, column=3, padx=50)
-# ---------------------------------------------Vechile No.
-customer_name_label = Label(customer_frame, text="Vechile No.",
-                            font=("arial", 15, "bold"), bg="lightblue", fg="blue")
-customer_name_label.grid(row=0, column=4)
-
-customerName = StringVar()
-customerName.set("")
-customer_name_entry = Entry(customer_frame, width=20, font="arial 15", bd=5,
-                            textvariable=customerName)
-customer_name_entry.grid(row=0, column=5, padx=50)
 
 # ===============Menu===============
-menu_frame = Frame(root, bd=8, bg="lightgreen", relief=GROOVE)
+menu_frame = Frame(root, bd=8, bg="lightgrey", relief=GROOVE)
 menu_frame.place(x=0, y=125, height=585, width=680)
 
 menu_label = Label(menu_frame, text="Destinations",
-                   font=("times new roman", 20, "bold"), bg="lightblue", fg="red", pady=0)
+                   font=("times new roman", 20, "bold"), bg="lightgrey", fg="red", pady=0)
 menu_label.pack(side=TOP, fill="x")
 
-menu_category_frame = Frame(menu_frame, bg="lightblue", pady=10)
+menu_category_frame = Frame(menu_frame, bg="lightgrey", pady=10)
 menu_category_frame.pack(fill="x")
 
 combo_lable = Label(menu_category_frame, text="Select Type",
-                    font=("arial", 12, "bold"), bg="lightblue", fg="blue")
+                    font=("arial", 12, "bold"), bg="lightgrey", fg="blue")
 combo_lable.grid(row=0, column=0, padx=10)
 
 menuCategory = StringVar()
@@ -408,18 +391,18 @@ menu_tabel.bind("<ButtonRelease-1>", load_item_from_menu)
 ###########################################################################################
 
 # ===============Item Frame=============
-item_frame = Frame(root, bd=8, bg="lightgreen", relief=GROOVE)
+item_frame = Frame(root, bd=8, bg="lightgrey", relief=GROOVE)
 item_frame.place(x=680, y=125, height=230, width=680)
 
 item_title_label = Label(item_frame, text="Toll Billing Desk",
-                         font=("times new roman", 20, "bold"), bg="lightgreen", fg="red")
+                         font=("times new roman", 20, "bold"), bg="lightgrey", fg="red")
 item_title_label.pack(side=TOP, fill="x")
 
-item_frame2 = Frame(item_frame, bg="lightgreen")
+item_frame2 = Frame(item_frame, bg="lightgrey")
 item_frame2.pack(fill=X)
 
 item_name_label = Label(item_frame2, text="From - To",
-                        font=("arial", 12, "bold"), bg="lightgreen", fg="blue")
+                        font=("arial", 12, "bold"), bg="lightgrey", fg="blue")
 item_name_label.grid(row=0, column=0)
 
 itemCategory = StringVar()
@@ -432,7 +415,7 @@ item_name = Entry(item_frame2, font="arial 12",
 item_name.grid(row=0, column=1, padx=10)
 
 item_rate_label = Label(item_frame2, text="Toll Price",
-                        font=("arial", 12, "bold"), bg="lightgreen", fg="blue")
+                        font=("arial", 12, "bold"), bg="lightgrey", fg="blue")
 item_rate_label.grid(row=0, column=2, padx=40)
 
 itemRate = StringVar()
@@ -442,7 +425,7 @@ item_rate = Entry(item_frame2, font="arial 12",
 item_rate.grid(row=0, column=3, padx=10)
 
 item_quantity_label = Label(item_frame2, text="Quantity",
-                            font=("arial", 12, "bold"), bg="lightgreen", fg="blue")
+                            font=("arial", 12, "bold"), bg="lightgrey", fg="blue")
 item_quantity_label.grid(row=1, column=0, padx=30, pady=15)
 
 itemQuantity = StringVar()
@@ -451,7 +434,7 @@ item_quantity = Entry(item_frame2, font="arial 12",
                       textvariable=itemQuantity, width=10)
 item_quantity.grid(row=1, column=1)
 
-item_frame3 = Frame(item_frame, bg="lightgreen")
+item_frame3 = Frame(item_frame, bg="lightgrey")
 item_frame3.pack(fill=X)
 
 add_button = ttk.Button(item_frame3, text="Add",
@@ -471,11 +454,11 @@ clear_button = ttk.Button(item_frame3, text="Clear",
 clear_button.grid(row=0, column=3, padx=40, pady=30)
 
 # ==============Order Frame=====================
-order_frame = Frame(root, bd=8, bg="lightgreen", relief=GROOVE)
+order_frame = Frame(root, bd=8, bg="lightgrey", relief=GROOVE)
 order_frame.place(x=680, y=335, height=370, width=680)
 
 order_title_label = Label(order_frame, text="Your Order",
-                          font=("times new roman", 20, "bold"), bg="lightgreen", fg="red")
+                          font=("times new roman", 20, "bold"), bg="lightgrey", fg="red")
 order_title_label.pack(side=TOP, fill="x")
 
 ############################## Order Tabel ###################################
@@ -513,7 +496,7 @@ order_tabel.pack(fill=BOTH, expand=1)
 ###########################################################################################
 
 total_price_label = Label(order_frame, text="Total Price",
-                          font=("arial", 12, "bold"), bg="lightgreen", fg="blue")
+                          font=("arial", 12, "bold"), bg="lightgrey", fg="blue")
 total_price_label.pack(side=LEFT, anchor=SW, padx=20, pady=10)
 
 totalPrice = StringVar()
