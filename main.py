@@ -226,7 +226,6 @@ def bill_button_operation():
         st += "-"*130 + "\n" + " "*4 + "DESCRIPTION\t\t\t\t\tRATE\tQUANTITY\t\tAMOUNT\n"
         st += "-"*130 + "\n"
 
-        # List of Items
         for i in menu_category:
             for j in order_dict[i].keys():
                 lis = order_dict[i][j]
